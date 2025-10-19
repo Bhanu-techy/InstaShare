@@ -1,0 +1,115 @@
+import {useState, useEffect} from 'react'
+import Cookies from 'js-cookie'
+import { useParams } from 'react-router-dom'
+import Header from '../Header'
+import ProfileItem from '../ProfileItem'
+
+import './index.css'
+
+const stateConstants = {
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  in_progress: 'LOADING',
+  initial: 'INITIAL',
+}
+
+const Userprofile = ()=>{
+
+  const [state, setState] = useState(stateConstants.in_progress)
+  const [userDetails, setDetails] = useState([])
+
+  const {id} = useParams()
+
+  useEffect(()=>{
+    const getUserProfile = async () => {
+    const url = `https://apis.ccbp.in/insta-share/users/${id}`
+
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+
+    if (response.ok) {
+      const user = data.user_details
+
+      const details = {
+        userName: user.user_name,
+        userId: user.user_id,
+        userBio: user.user_bio,
+        postsCount: user.posts_count,
+        followersCount: user.followers_count,
+        followingCount: user.following_count,
+        profilePic: user.profile_pic,
+        stories: user.stories,
+        posts: user.posts,
+      }
+
+      setDetails(details)
+      setState(stateConstants.success)
+    } else {
+      setState(stateConstants.failure)
+    }
+  }
+  getUserProfile()
+  })
+
+  const renderProfileView = () => {
+   
+
+    return (
+      <div>
+        <ProfileItem details={userDetails} />
+      </div>
+    )
+  }
+
+  const renderLoadingView = () => (
+    <div className="profile-loader" data-testid="loader">
+      <h1>Loading...</h1>
+    </div>
+  )
+
+  const renderFailureView = () => (
+    <div className="failure-view">
+      <img
+        src="https://res.cloudinary.com/dsqphsoxb/image/upload/v1751650133/failureView_po4xd8.png"
+        alt="failure view"
+        className="failure-view-img"
+      />
+      <p>Something went wrong. Please try again</p>
+      <button type="button" onClick={this.getUserProfile}>
+        Try again
+      </button>
+    </div>
+  )
+
+  const renderProfileSuccessView = () => {
+
+    switch (state) {
+      case stateConstants.success:
+        return renderProfileView()
+      case stateConstants.failure:
+        return renderFailureView()
+      case stateConstants.in_progress:
+        return renderLoadingView()
+      default:
+        return null
+    }
+  }
+
+    return (
+      <div className="home-container">
+        <Header homenavcss="" profilenavcss="" />
+        {renderProfileSuccessView()}
+      </div>
+    )
+  }
+
+
+export default Userprofile

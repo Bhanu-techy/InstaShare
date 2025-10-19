@@ -43,6 +43,7 @@ function Home() {
   getPosts()
   },[])
 
+  console.log(postList)
   const renderPostsSuccessView = () => {
     return (
       <ul className="post-bgcontainer">

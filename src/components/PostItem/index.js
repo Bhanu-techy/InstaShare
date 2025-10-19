@@ -9,7 +9,6 @@ const PostItem = props => {
     const {
       postDetails = {},
       userId,
-      postId,
       profilePic,
       likesCount,
       userName,
@@ -25,7 +24,7 @@ const PostItem = props => {
             className="profile-pic"
             alt="post author profile"
           />
-          <Link to={`/users/${userId}`} className="link">
+          <Link to={`/profile/${userId}`} className="link">
             <p>{userName}</p>
           </Link>
         </div>
