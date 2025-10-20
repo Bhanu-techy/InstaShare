@@ -59,6 +59,42 @@ const Userprofile = ()=>{
   getUserProfile()
   })
 
+  const getUserProfile = async () => {
+    const url = `https://apis.ccbp.in/insta-share/users/${id}`
+
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+
+    if (response.ok) {
+      const user = data.user_details
+
+      const details = {
+        userName: user.user_name,
+        userId: user.user_id,
+        userBio: user.user_bio,
+        postsCount: user.posts_count,
+        followersCount: user.followers_count,
+        followingCount: user.following_count,
+        profilePic: user.profile_pic,
+        stories: user.stories,
+        posts: user.posts,
+      }
+
+      setDetails(details)
+      setState(stateConstants.success)
+    } else {
+      setState(stateConstants.failure)
+    }
+  }
+
   const renderProfileView = () => {
    
 
@@ -83,7 +119,7 @@ const Userprofile = ()=>{
         className="failure-view-img"
       />
       <p>Something went wrong. Please try again</p>
-      <button type="button" onClick={this.getUserProfile}>
+      <button type="button" onClick={getUserProfile}>
         Try again
       </button>
     </div>

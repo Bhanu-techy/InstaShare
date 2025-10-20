@@ -1,8 +1,7 @@
-import {Component} from 'react'
-//import Loader from 'react-loader-spinner'
+import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
 import Header from '../Header'
-import MyProfileItem from '../ProfileItem'
+import ProfileItem from '../ProfileItem'
 
 import './index.css'
 
@@ -13,17 +12,16 @@ const stateConstants = {
   initial: 'INITIAL',
 }
 
-class MyProfile extends Component {
-  state = {profileDetails: {}, state: stateConstants.initial}
+const Userprofile = ()=>{
 
-  componentDidMount() {
-    this.getProfile()
-  }
+  const [state, setState] = useState(stateConstants.in_progress)
+  const [userDetails, setDetails] = useState([])
 
-  getProfile = async () => {
-    this.setState({state: stateConstants.in_progress})
 
+  useEffect(()=>{
+    const getUserProfile = async () => {
     const url = 'https://apis.ccbp.in/insta-share/my-profile'
+
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       headers: {
@@ -31,6 +29,7 @@ class MyProfile extends Component {
       },
       method: 'GET',
     }
+
     const response = await fetch(url, options)
     const data = await response.json()
 
@@ -48,68 +47,100 @@ class MyProfile extends Component {
         stories: user.stories,
         posts: user.posts,
       }
-      this.setState({
-        profileDetails: details,
-        state: stateConstants.success,
-      })
+      
+      setDetails(details)
+      setState(stateConstants.success)
     } else {
-      this.setState({state: stateConstants.failure})
+      setState(stateConstants.failure)
+    }
+  }
+  getUserProfile()
+  })
+
+  const getUserProfile = async () => {
+    const url = 'https://apis.ccbp.in/insta-share/my-profile'
+
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+
+    const response = await fetch(url, options)
+    const data = await response.json()
+
+    if (response.ok) {
+      const user = data.user_details
+      console.log(user)
+      const details = {
+        userName: user.user_name,
+        userId: user.user_id,
+        userBio: user.user_bio,
+        postsCount: user.posts_count,
+        followersCount: user.followers_count,
+        followingCount: user.following_count,
+        profilePic: user.profile_pic,
+        stories: user.stories,
+        posts: user.posts,
+      }
+
+      setDetails(details)
+      setState(stateConstants.success)
+    } else {
+      setState(stateConstants.failure)
     }
   }
 
-  renderProfileView = () => {
-    const {profileDetails} = this.state
-
-    return (
+  const renderProfileView = () => (
       <div>
-        <MyProfileItem details={profileDetails} />
+        <ProfileItem details={userDetails} />
       </div>
     )
-  }
+  
 
-  renderFailureView = () => (
+  const renderLoadingView = () => (
+    <div className="profile-loader" data-testid="loader">
+      <h1>Loading...</h1>
+    </div>
+  )
+
+  const renderFailureView = () => (
     <div className="failure-view">
       <img
         src="https://res.cloudinary.com/dsqphsoxb/image/upload/v1751650133/failureView_po4xd8.png"
         alt="failure view"
         className="failure-view-img"
       />
-      <p>Something went wrong. Please Try again</p>
-      <button type="button" onClick={this.getProfile}>
+      <p>Something went wrong. Please try again</p>
+      <button type="button" onClick={getUserProfile}>
         Try again
       </button>
     </div>
   )
 
-  renderLoadingView = () => (
-    <div className="profile-loader" data-testid="loader">
-      <h1>Loading...s</h1>
-    </div>
-  )
-
-  renderProfileSuccessView = () => {
-    const {state} = this.state
+  const renderProfileSuccessView = () => {
 
     switch (state) {
       case stateConstants.success:
-        return this.renderProfileView()
+        return renderProfileView()
       case stateConstants.failure:
-        return this.renderFailureView()
+        return renderFailureView()
       case stateConstants.in_progress:
-        return this.renderLoadingView()
+        return renderLoadingView()
       default:
         return null
     }
   }
 
-  render() {
     return (
       <div className="home-container">
-        <Header homenavcss="" profilenavcss="activenav" />
-        {this.renderProfileSuccessView()}
+        <Header/>
+        {renderProfileSuccessView()}
       </div>
     )
   }
-}
 
-export default MyProfile
+
+export default Userprofile

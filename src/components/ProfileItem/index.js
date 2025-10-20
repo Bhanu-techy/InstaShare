@@ -17,9 +17,6 @@ const ProfileView = props => {
 
   const {stories = [], posts = []} = details
 
-  const nopostview = postsCount === 0 ? 'nopostviewcss' : ''
-  const postview = postsCount > 0 ? 'nopostviewcss' : ''
-
   return (
     <div className="profile-bgcontainer">
       <div className="profile-container">
@@ -65,18 +62,19 @@ const ProfileView = props => {
           </div>
         </div>
         <div className="profile-post-bgcontainer">
-          <div className={`no-post-div ${postview} `}>
+          {postsCount === 0 ?(
+            <div className='no-post-div'>
             <BiCamera className="bicamera-icon" />
             <h1>No Posts Yet</h1>
           </div>
-
-          <ul className={`profile-post-container ${nopostview}`}>
+          ) : (
+          <ul className="profile-post-container">
             {posts.map(post => (
               <li key={post.id}>
                 <img src={post.image} className="profile-posts" alt="my post" />
               </li>
             ))}
-          </ul>
+          </ul>)}
         </div>
       </div>
     </div>

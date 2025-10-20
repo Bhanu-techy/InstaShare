@@ -103,6 +103,13 @@
 .user-id-sm {
   display: none;
 }
+.failure-view{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (max-width: 768px) {
   .profile_pic {

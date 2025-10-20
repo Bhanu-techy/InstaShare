@@ -29,7 +29,7 @@ const Login = () => {
       navigate("/", {replace : true})
     } else {
       setErrmsg(data.error_msg)
-      showSubmitErr(true)
+      setShowErr(true)
     }
     }
 

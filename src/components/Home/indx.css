@@ -1,5 +1,6 @@
 .slider-container-md {
   width: 70vw;
+  height: 100px;
   margin: 10px;
 }
 .home-container {
@@ -17,7 +18,7 @@
   width: 80vw;
 }
 .story-img {
-  width: 80px;
+  width: 50px;
   height: 80px;
   border-radius: 50%;
 }
@@ -36,6 +37,7 @@ ul {
 .slider-container-md {
   width: 100%;
   padding: 0px;
+  height: 100px;
 }
 .loader-container {
   display: flex;
