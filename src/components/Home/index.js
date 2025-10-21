@@ -5,9 +5,10 @@ import Header from '../Header'
 import Cookies from 'js-cookie'
 
 import Slider from 'react-slick'
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import './index.css'
 
 const stateConstants = {
   success: 'SUCCESS',
@@ -94,7 +95,7 @@ function Home() {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 5,
+      slidesToShow: 7,
       slidesToScroll: 1,
     }
 
@@ -168,14 +169,14 @@ function Home() {
   
   const renderPostsSuccessView = () => {
     return (
-      <>
+      <div className='main-container'>
       {renderStorySuccessView()}
-      <ul className="post-bgcontainer">
+      <ul className="-container">
         {postList.map(each => (
           <PostItem details={each} key={each.postId} />
         ))}
       </ul>
-      </>
+      </div>
     )
   }
 

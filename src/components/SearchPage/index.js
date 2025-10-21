@@ -16,7 +16,7 @@ export default function SearchPage() {
     const [state, setState] = useState(stateConstants.in_progress)
     const [posts, setPosts] = useState([])
     
-    const {searchInput} = useContext(SearchContext)
+    const {searchInput, setSearchInput} = useContext(SearchContext)
 
     useEffect(()=>{
     const onSearchResults = async () => {
@@ -44,6 +44,7 @@ export default function SearchPage() {
       }))
       setState(stateConstants.success)
       setPosts(postList)
+      
     } else {
       setState(stateConstants.failure)
     }
