@@ -4,7 +4,9 @@ import {BsGrid3X3} from 'react-icons/bs'
 import './index.css'
 
 const ProfileView = props => {
+  
   const {details} = props
+
   const {
     userName,
     userId,

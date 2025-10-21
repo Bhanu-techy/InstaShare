@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
+import { SearchContext } from "../context/SearchContext";
+
 import './index.css'
 
 function Header() {
 
   const [shownavItems, setShownavItems] = useState(false)
-  const [searchInput, setSearchInput] = useState("")
+  const {searchInput, onSearchInput} = useContext(SearchContext)
+
   const navigate = useNavigate()
 
   const onClickLogout = () => {
@@ -24,12 +27,9 @@ function Header() {
   }
 
   const onClickSearchBtn = () => {
-
+    navigate("/search")
   }
-
-  const onSearchInput = e => {
-    setSearchInput(e.target.value)
-  }
+  
 
    const navsmall = shownavItems ? 'nav-container-sm' : ''
   const navshowsm = shownavItems ? 'navshow' : 'navhide'
