@@ -10,14 +10,16 @@
   align-items: center;
   margin: 10px;
 }
-.post-bgcontainer {
-  width: 70vw;
-}
 .post-container {
-  width: 100%;
-  min-height: 750px;
+  width: 80%;
+
   border: 2px solid #bfbfbf;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10px;
 }
 .post-img {
   width: 100%;

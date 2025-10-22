@@ -46,7 +46,14 @@
   display: flex;
   justify-content: center;
 }
-
+.logout-btn{
+  background-color: #0b69ff;
+  border: 0px;
+  border-radius: 5px;
+  color: #ffffff;
+  height: 30px;
+  width: 80px;
+}
 ul {
   list-style: none;
 }

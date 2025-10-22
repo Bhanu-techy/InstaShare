@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
 import PostItem from '../PostItem'
 import Header from '../Header'
+import { Oval } from "react-loader-spinner";
 import Cookies from 'js-cookie'
 
 import Slider from 'react-slick'
@@ -14,7 +14,6 @@ const stateConstants = {
   success: 'SUCCESS',
   failure: 'FAILURE',
   in_progress: 'LOADING',
-  initial: 'INITIAL',
 }
 
 
@@ -90,35 +89,6 @@ function Home() {
   getstories()
   },[])
 
-  const renderStorySuccessView = () => {
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 7,
-      slidesToScroll: 1,
-    }
-
-    return (
-      <>
-        <ul className="slider-container-md">
-          <Slider {...settings}>
-            {storiesList.map(each => (
-              <li key={each.userId} className="story-container">
-                <img
-                  src={each.storyUrl}
-                  alt="user story"
-                  className="story-img"
-                />
-                <p className="stories-name">{each.userName}</p>
-              </li>
-            ))}
-          </Slider>
-        </ul>
-      </>
-    )
-  }
-
   const  getPosts = async () => {
     const posturl = 'https://apis.ccbp.in/insta-share/posts'
     const jwtToken = Cookies.get('jwt_token')
@@ -148,9 +118,47 @@ function Home() {
     }
   }
 
+  const renderStorySuccessView = () => {
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 7,
+      slidesToScroll: 1,
+    }
+
+    return (
+      <>
+        <ul className="slider-container-md">
+          <Slider {...settings}>
+            {storiesList.map(each => (
+              <li key={each.userId} className="story-container">
+                <img
+                  src={each.storyUrl}
+                  alt="user story"
+                  className="story-img"
+                />
+                <p className="stories-name">{each.userName}</p>
+              </li>
+            ))}
+          </Slider>
+        </ul>
+      </>
+    )
+  }
+
   const renderLoadingView = () => (
     <div className="profile-loader" data-testid="loader">
-      <h1>Loading...</h1>
+      <Oval
+            visible={true}
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="oval-loading"
+            secondaryColor="#4fa94d"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
     </div>
   )
 
@@ -171,7 +179,7 @@ function Home() {
     return (
       <div className='main-container'>
       {renderStorySuccessView()}
-      <ul className="-container">
+      <ul className="post-bgcontainer">
         {postList.map(each => (
           <PostItem details={each} key={each.postId} />
         ))}

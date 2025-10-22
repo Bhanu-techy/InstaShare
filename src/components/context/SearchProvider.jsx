@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SearchContext } from "./SearchContext";
 
 export const SearchProvider = ({ children }) => {
@@ -10,7 +10,7 @@ export const SearchProvider = ({ children }) => {
   }
 
   return (
-    <SearchContext.Provider value={{ searchInput, onSearchInput }}>
+    <SearchContext.Provider value={{ searchInput, onSearchInput, setSearchInput }}>
       {children}
     </SearchContext.Provider>
   );

@@ -91,7 +91,7 @@ function Header() {
                       </li>
                     </Link>
                     <li className={`nav-item ${navshowsm}`}>
-                      <button type="button" onClick={onClickLogout}>
+                      <button type="button" className='logout-btn' onClick={onClickLogout}>
                         Logout
                       </button>
                     </li>

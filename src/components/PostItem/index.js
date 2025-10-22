@@ -37,7 +37,7 @@ const PostItem = props => {
     }
 
   return (
-    <li>
+    <li className='post-container'>
         <div className="profile-details">
           <img
             src={profilePic}
