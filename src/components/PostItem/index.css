@@ -23,7 +23,7 @@
 }
 .post-img {
   width: 100%;
-  height: 600px;
+  height: 90vh;
 }
 .like-button {
   border: none;
@@ -40,4 +40,13 @@
 }
 .post-time {
   color: #bfbfbf;
+}
+
+@media (max-width : 768px){
+.post-img{
+  height: 700px;
+}.post-container{
+  width: 90%;
+  height: 600px;
+}
 }

@@ -52,7 +52,7 @@ export default function SearchPage() {
   }  
 
   onSearchResults()
-    },[])
+    },[searchInput])
 
      const renderFailureView = () => (
     <div className="failure-view">

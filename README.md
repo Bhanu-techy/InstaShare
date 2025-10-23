@@ -1,4 +1,6 @@
-**Insta Share App**
+### Title
+
+***Insta Share App***
 
 ### Prerequisites
 
@@ -9,20 +11,12 @@
 
 - What is Figma?
   - Figma is a vector graphics editor and prototyping tool which is primarily web-based. You can check more info on the <a href="https://www.figma.com/" target="_blank">Website</a>
-- Create a Free account in Figma
-  - Kindly follow the instructions as shown in <a href="https://www.youtube.com/watch?v=hrHL2VLMl7g" target="_blank">this</a> video to create a Free Figma account. Watch the video upto **00:55**
-- How to Check CSS in Figma?
-  - Kindly follow the instructions as shown in <a href="https://youtu.be/B242nuM3y2s?t=80" target="_blank">this</a> video to check CSS in the Figma screen. Watch the video upto **02:45**
-- Export Images in Figma screen
-
-  - Kindly follow the instructions as shown in <a href="https://www.youtube.com/watch?v=NpzL1MONwaw" target="_blank">this</a> video to export images from the Figma screen
-  - Click on the Export button to get Export options as shown in the below image
 
   <div style="text-align:center;margin:10px 0px 0px 45px;width:200px;">
     <img src="https://assets.ccbp.in/frontend/react-js/figma-export-option.png" />
   </div>
 
-- Upload your exported images from Figma to Cloudinary and get image URLs from Cloudinary. Refer <a href="https://learning.ccbp.in/projects/course?c_id=fe4c935d-3ad5-4bb8-a1a5-9b045ae70010&s_id=2f72d6fe-09a7-4c0a-b0db-196740c853a0&t_id=6535e48d-fb4e-45c4-9654-3da423c79e26" target="_blank">this</a> session for better understanding
+- Uploaded my exported images from Figma to Cloudinary and get image URLs from Cloudinary. Refer <a href="https://learning.ccbp.in/projects/course?c_id=fe4c935d-3ad5-4bb8-a1a5-9b045ae70010&s_id=2f72d6fe-09a7-4c0a-b0db-196740c853a0&t_id=6535e48d-fb4e-45c4-9654-3da423c79e26" target="_blank">this</a> session for better understanding
 
 </details>
 
@@ -83,12 +77,10 @@ The app must have the following functionalities
     - Initially for every Post **BsHeart**, **FaRegComment**, **BiShareAlt** from `react-icons` should be displayed
     - When the **username** in the particular post is clicked, then the page should be navigated to the User Details Route
     - When the **Like** icon (FcLike) is clicked,
-      - An HTTP POST request should be made to the **Post Like API URL** with `like_status` as `true`
       - It should change to **Unlike** icon (BsHeart)
       - Likes count of that particular post should be incremented by one
     - When the **Unlike** icon is clicked,
 
-      - An HTTP POST request should be made to the **Post Like API URL** with `like_status` as `false`
       - It should change to **Like** icon
       - Likes count of that particular post should be decremented by one
 
@@ -143,11 +135,9 @@ The app must have the following functionalities
     - Initially for every Post **BsHeart**, **FaRegComment**, **BiShareAlt** from `react-icons` should be displayed
     - When the **username** in the particular post is clicked, then the page should be navigated to the User Details Route
     - When the **Like** icon is clicked,
-      - An HTTP POST request should be made to the **Post Like API URL** with `like_status` as `true`
       - It should change to **Unlike** icon
       - Likes count of that particular post should be incremented by one
     - When the **Unlike** icon is clicked,
-      - An HTTP POST request should be made to the **Post Like API URL** with `like_status` as `false`
       - It should change to **Like** icon
       - Likes count of that particular post should be decremented by one
 
@@ -200,11 +190,20 @@ The app must have the following functionalities
   - Render `UserProfile` Route component when the path in URL matches `/users/:id`
   - Render `SearchResult` Route component when the path in URL matches `/search`
 
-- Wrap the `Loader` component with an HTML container element and add the `testid` attribute value as **loader** to it
+- Wraped the `Loader` component with an HTML container element and add the `testid` attribute value as **Oval** to it
 
   ```jsx
   <div className="loader-container" testid="loader">
-    <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
+    <Oval
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#0000FF"
+                  ariaLabel="oval-loading"
+                  secondaryColor="#ADD8E6"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
   </div>
   ```
 
@@ -388,33 +387,6 @@ Returns a response containing the list of user posts.
 }
 ```
 
-**Post Like API**
-
-#### API: `https://apis.ccbp.in/insta-share/posts/{postId}/like`
-
-#### Example: `https://apis.ccbp.in/insta-share/posts/f25d77f0-602e-41d1-971e-4b8cf54709eb/like`
-
-#### Method: `POST`
-
-#### Request:
-
-```json
-{
-  "like_status": true // If you want to like a post then set like_status as true otherwise set it as false.
-}
-```
-
-#### Description:
-
-Returns a response containing the whether post has been liked or not
-
-#### Sample Response
-
-```json
-{
-  "message": "Post has been liked"
-}
-```
 
 **My Profile API**
 

@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import { Oval } from "react-loader-spinner";
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import ProfileItem from '../ProfileItem'
@@ -102,7 +103,16 @@ const Userprofile = ()=>{
 
   const renderLoadingView = () => (
     <div className="profile-loader" data-testid="loader">
-      <h1>Loading...</h1>
+      <Oval
+                  visible={true}
+                  height="80"
+                  width="80"
+                  color="#0000FF"
+                  ariaLabel="oval-loading"
+                  secondaryColor="#ADD8E6"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
     </div>
   )
 

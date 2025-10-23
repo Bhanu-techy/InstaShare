@@ -82,7 +82,6 @@ function Home() {
         storyUrl: each.story_url,
       }))
       setStories(stories)
-      console.log(stories)
     }
     
   }
